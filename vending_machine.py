@@ -1,3 +1,5 @@
+# pylint: disable=locally-disabled,missing-docstring
+
 def minimum_number_of_coins(amount, wallet):
     solutions = [(0, wallet)]
     for intermediate_amount in range(1, amount + 1):
@@ -6,8 +8,8 @@ def minimum_number_of_coins(amount, wallet):
 
 def find_best_solution(amount, coin_values, solutions):
     return min(
-        find_solutions(amount, coin_values, solutions), 
-        key=lambda solution: solution[0], 
+        find_solutions(amount, coin_values, solutions),
+        key=lambda solution: solution[0],
         default=("IMPOSSIBLE", {}))
 
 def find_solutions(amount, coin_values, solutions):
@@ -25,9 +27,14 @@ def update(a_dict, another_dict):
     new_dict.update(another_dict)
     return new_dict
 
-
-if __name__ == "__main__":
+def main():
     amount = int(input())
     ncoin_types = int(input())
-    wallet = {coin_value: coins_left for coins_left, coin_value in (map(int, input().split()) for _ in range(ncoin_types))}
+    wallet = {
+        int(coin_value): int(coins_left) for coins_left, coin_value in
+        (input().split() for _ in range(ncoin_types))}
     print(minimum_number_of_coins(amount, wallet))
+
+
+if __name__ == "__main__":
+    main()
